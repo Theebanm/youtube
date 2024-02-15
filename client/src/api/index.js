@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const API = axios.create({ baseURL: `http://localhost:5500/` });
 const API = axios.create({
-  baseURL: `https://youtubeclone5031.herokuapp.com/`,
+  baseURL: `https://youtube-ycbc.onrender.com`,
 });
 
 API.interceptors.request.use((req) => {
