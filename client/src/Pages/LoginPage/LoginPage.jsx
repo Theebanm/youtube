@@ -40,7 +40,7 @@ const LoginPage = () => {
     function start() {
       gapi.client.init({
         clientId:
-          "565866976001-kogc3n05n90ug8i92r0t40tl8co0fhse.apps.googleusercontent.com",
+          "247427712416-s8kjtkout9vt032r4tng59bgdqfkco04.apps.googleusercontent.com",
         scope: "email",
       });
     }
@@ -68,7 +68,7 @@ const LoginPage = () => {
           <>
             <GoogleLogin
               clientId={
-                "619160695551-pf6ir36kbp3ejk3hq91609f9ok8ke578.apps.googleusercontent.com"
+                "247427712416-s8kjtkout9vt032r4tng59bgdqfkco04.apps.googleusercontent.com"
               }
               onSuccess={onSuccess}
               onFailure={onFailure}
