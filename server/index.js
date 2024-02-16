@@ -13,24 +13,6 @@ dontenv.config();
 const app = express();
 // otp verification
 
-var options = {
-  authorization:
-    "P31lsC8Du0KJdRoGamZ9SXpyhYWgOArnH5ifU62Vv4eEjwFNb7zsrFDONt3fA7McGdZHpa6JKC5u1nmg",
-  message: "This is message code otp 5678",
-  numbers: ["7092798393"],
-};
-
-// send message
-
-fast2sms
-  .sendMessage(options)
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
 app.use(cors());
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));

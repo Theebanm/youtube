@@ -8,6 +8,11 @@ import { Link } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "../../Pages/Auth/Auth";
+import { useEffect } from "react";
+import { login } from "../../actions/auth";
+
+import { GoogleLogin } from "react-google-login";
+import { gapi } from "gapi-script";
 function Navbar({ toggleDrawer, setEditCreateChanelBtn }) {
   const [AuthBtn, setAuthBtn] = useState(false);
   const CurrentUser = useSelector((state) => state.currentUserReducer);
@@ -20,6 +25,31 @@ function Navbar({ toggleDrawer, setEditCreateChanelBtn }) {
   //   },
   // };
   console.log(CurrentUser);
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId:
+          "578747189728-f4nq453s7qcomv0glgh4pib5032f857m.apps.googleusercontent.com",
+        scope: "email",
+      });
+    }
+    gapi.load("client:auth2", start);
+  }, []);
+
+  const dispatch = useDispatch();
+  // const logTmp=()=>{
+  //   dispatch(login({ email:"abzxy50312@gmail.com" }));
+  // }
+  const onSuccess = (response) => {
+    const Email = response?.profileObj.email;
+    console.log(Email);
+    dispatch(login({ email: Email }));
+  };
+
+  const onFailure = (response) => {
+    console.log("Failed", response);
+  };
 
   return (
     <>
@@ -64,11 +94,20 @@ function Navbar({ toggleDrawer, setEditCreateChanelBtn }) {
               </div>
             </>
           ) : (
-            <Link to={"/login"} className="Auth_Btn">
-              {/* <p onClick={logTmp} className="Auth_Btn"> */}
-              <BiUserCircle size={22} />
-              <b>Sign in</b>
-            </Link>
+            <GoogleLogin
+              clientId={
+                "578747189728-f4nq453s7qcomv0glgh4pib5032f857m.apps.googleusercontent.com"
+              }
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              render={(renderProps) => (
+                <p onClick={renderProps.onClick} className="Auth_Btn">
+                  {/* <p onClick={logTmp} className="Auth_Btn"> */}
+                  <BiUserCircle size={22} />
+                  <b>Sign in</b>
+                </p>
+              )}
+            />
           )}
         </div>
       </div>
